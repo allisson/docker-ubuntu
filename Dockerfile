@@ -1,6 +1,6 @@
 # Ubuntu
 #
-# VERSION               0.1
+# VERSION               0.2
 
 FROM ubuntu:latest
 MAINTAINER Allisson Azevedo <allisson@gmail.com>
@@ -22,7 +22,7 @@ RUN ln -s /bin/true /usr/bin/ischroot
 
 # upgrade distro
 RUN apt-get update && apt-get upgrade -y
-RUN locale-gen en_US
+RUN locale-gen en_US en_US.UTF-8
 RUN apt-get install lsb-release -y
 
 # clean packages
