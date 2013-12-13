@@ -1,6 +1,6 @@
 # Ubuntu
 #
-# VERSION               0.2
+# VERSION               0.3
 
 FROM ubuntu:latest
 MAINTAINER Allisson Azevedo <allisson@gmail.com>
@@ -13,16 +13,9 @@ ENV INITRD No
 ADD source.list /etc/apt/sources.list
 ADD 25norecommends /etc/apt/apt.conf.d/25norecommends
 
-# avoid upgrade error
-RUN dpkg-divert --local --rename --add /sbin/initctl
-RUN ln -s /bin/true /sbin/initctl
-ADD policy-rc.d /usr/sbin/policy-rc.d
-RUN dpkg-divert --divert /usr/bin/ischroot.debianutils --rename /usr/bin/ischroot
-RUN ln -s /bin/true /usr/bin/ischroot
-
 # upgrade distro
-RUN apt-get update && apt-get upgrade -y
 RUN locale-gen en_US en_US.UTF-8
+RUN apt-get update && apt-get upgrade -y
 RUN apt-get install lsb-release -y
 
 # clean packages
